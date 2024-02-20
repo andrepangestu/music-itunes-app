@@ -29,7 +29,6 @@ const FormSearch: React.FC<FormSearchProps> = (props) => {
       className="flex flex-col px-[30px] w-full pb-6"
     >
       <input
-        autoFocus
         ref={inputRef}
         type="text"
         placeholder="Artist / Album / Title"
