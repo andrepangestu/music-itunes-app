@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import { PlayIcon } from "./Icons";
 import { VideoContext } from "../context/VideoContext";
 
@@ -9,30 +9,16 @@ interface VideoProps {
 }
 
 const Video: React.FC<VideoProps> = (props) => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
   const { currentPlaying, setCurrentPlaying } = useContext(VideoContext);
   const isPlaying = currentPlaying === props.id;
 
-  useEffect(() => {
-    if (isPlaying) {
-      // Start playing the video
-      videoRef.current?.play();
-    } else {
-      // Stop playing the video
-      videoRef.current?.pause();
-    }
-  }, [isPlaying]);
-
   const playVideo = () => {
-    setCurrentPlaying(props.id);
+    if (currentPlaying && isPlaying) {
+      setCurrentPlaying(null);
+    } else {
+      setCurrentPlaying(props.id);
+    }
   };
-
-  const pauseVideo = () => {
-    setCurrentPlaying(null);
-  };
-
-  console.log("Video rendered", isPlaying);
 
   return (
     <>
@@ -52,16 +38,9 @@ const Video: React.FC<VideoProps> = (props) => {
           <PlayIcon />
         </div>
       </div>
+
       {isPlaying && (
-        <video
-          className="hidden"
-          width="100"
-          height={100}
-          controls
-          autoPlay
-          onClick={pauseVideo}
-          ref={videoRef}
-        >
+        <video className="hidden" width="100" height={100} controls autoPlay>
           <source src={props.urlVideo} type="video/mp4" />
           Your browser does not support HTML video.
         </video>
