@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import ResultPage from "./pages/result-page";
+import { VideoProvider } from "./context/VideoProvider";
 
 const router = createBrowserRouter([
   {
@@ -9,7 +10,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/result",
-    element: <ResultPage />,
+    element: (
+      <VideoProvider>
+        <ResultPage />
+      </VideoProvider>
+    ),
   },
 ]);
 

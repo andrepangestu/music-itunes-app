@@ -177,6 +177,7 @@ const ResultPage = () => {
                   <Video
                     urlImage={item.artworkUrl100}
                     urlVideo={item.previewUrl}
+                    id={item.collectionId}
                   />
                 </div>
                 <div className="flex flex-col flex-1 pt-1 pl-3 pr-0.5 justify-between">
